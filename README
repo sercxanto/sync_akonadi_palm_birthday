@@ -1,0 +1,23 @@
+sync_akonadi_palm_birthday - Copies birthday custom field on palm to akonadi
+
+Unfourtunately in recent KDE4 versions of kpilot it is not longer possible to
+copy the birthday information stored custom field on the palm handheld
+automatically on hotsync, see
+https://www.georglutz.de/blog/archives/102-Contacts-sync-problems-with-kpilot-in-KDE4.html.
+
+Fourtunately all the adressbook information from palm handheld is stored in the
+VCARD information on KDE/akonadi in special X-Field like
+<code>X-KPILOT-CUSTOM0</code>.
+
+This script now parses the pilot custom field in the akonadi VCARD and adds an
+addionatl BDAY header there. BDAY is the offical data field for VCARDs for
+borthday information.
+
+To do so it writes directly to the local mysql database akonadi is currently
+using. This is just a quick'n dirty solution. Of course it would be much
+cleaner to use the akonadi interface. Use this script at your own risk, you
+have be warned. At least make sure that no other application is writing to
+akonadi at the same time.
+
+The shell script akonadi_test_mirror.sh is meant as test import real live data
+into a local test database to check in advance that nothing goes wrong.
